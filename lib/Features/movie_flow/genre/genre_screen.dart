@@ -2,48 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter16_movierec/Core/constants.dart';
 import 'package:flutter16_movierec/Core/widgets/primary_button.dart';
 import 'package:flutter16_movierec/Features/movie_flow/genre/list_card.dart';
+import 'package:flutter16_movierec/Features/movie_flow/movie_flow_controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'genre.dart';
 
-class GenreScreen extends StatefulWidget {
+class GenreScreen extends ConsumerWidget {
   const GenreScreen(
-      {Key? key, required this.nextPage, required this.previousPage})
+      {Key? key,})
       : super(key: key);
 
-  final VoidCallback nextPage;
-  final VoidCallback previousPage;
 
   @override
-  State<GenreScreen> createState() => _GenreScreenState();
-}
-
-class _GenreScreenState extends State<GenreScreen> {
-  List<Genre> genres = [
-    Genre(name: 'Action'),
-    Genre(name: 'Comedy'),
-    Genre(name: 'Horror'),
-    Genre(name: 'Anime'),
-    Genre(name: 'Drama'),
-    Genre(name: 'Romance'),
-    Genre(name: 'Family'),
-  ];
-
-  void toggleSelected(Genre genre) {
-    List<Genre> updatedGenres = [
-      for (final oldGenre in genres)
-        if (oldGenre == genre) oldGenre.toggleSelected() else oldGenre
-    ];
-    setState(() {
-      genres = updatedGenres;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: widget.previousPage,
+          onPressed: ref.read(movieFlowControllerProvider.notifier).previousPage,
         ),
       ),
       body: Center(
@@ -58,19 +33,20 @@ class _GenreScreenState extends State<GenreScreen> {
                 child: ListView.separated(
                     padding:
                         const EdgeInsets.symmetric(vertical: kListItemSpacing),
+                    itemCount: ref.watch(movieFlowControllerProvider).genres.length,
                     itemBuilder: (context, index) {
-                      final genre = genres[index];
+                      final genre = ref.watch(movieFlowControllerProvider).genres[index];
                       return ListCard(
                         genre: genre,
-                        onTap: () => toggleSelected(genre),
+                        onTap: () => ref.read(movieFlowControllerProvider.notifier).toggleSelected(genre),
                       );
                     },
                     separatorBuilder: (context, index) {
                       return SizedBox(height: kListItemSpacing,);
                     },
-                    itemCount: genres.length)),
+                   )),
             PrimaryButton(
-                onPressed: widget.nextPage,
+                onPressed: ref.read(movieFlowControllerProvider.notifier).nextPage,
                 text: 'Continue',
                 width: 150),
             const SizedBox(

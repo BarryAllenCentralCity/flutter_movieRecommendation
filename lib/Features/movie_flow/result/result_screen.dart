@@ -2,30 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter16_movierec/Core/constants.dart';
 import 'package:flutter16_movierec/Core/widgets/primary_button.dart';
 import 'package:flutter16_movierec/Features/movie_flow/genre/genre.dart';
+import 'package:flutter16_movierec/Features/movie_flow/movie_flow_controller.dart';
 import 'package:flutter16_movierec/Features/movie_flow/result/movie.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends ConsumerWidget {
   const ResultScreen({Key? key}) : super(key: key);
 
   static route({bool fullscreenDialog = true}) => MaterialPageRoute(
         builder: (context) => const ResultScreen(),
+    fullscreenDialog: fullscreenDialog,
       );
 
   final double movieHeight = 150;
 
-  final movie = const Movie(
-    title: 'The Hulk',
-    overview:
-        'Bruce Banner, researcher, suffers an accident in the lab the turns him into this monster',
-    voteAverage: 4.8,
-    genres: [Genre(name: 'Action'), Genre(name: 'Fantasy')],
-    releaseDate: '2019-05-24',
-    backdropPath: '',
-    posterPath: '',
-  );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -41,7 +34,7 @@ class ResultScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     bottom: -(movieHeight / 2),
                     child: MovieImageDetails(
-                      movie: movie,
+                      movie: ref.watch(movieFlowControllerProvider).movie,
                       movieHeight: movieHeight,
                     ),
                   )
@@ -53,7 +46,7 @@ class ResultScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  movie.overview,
+                    ref.watch(movieFlowControllerProvider).movie.overview,
                   style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
@@ -92,7 +85,7 @@ class CoverImage extends StatelessWidget {
   }
 }
 
-class MovieImageDetails extends StatelessWidget {
+class MovieImageDetails extends ConsumerWidget {
   const MovieImageDetails(
       {Key? key, required this.movieHeight, required this.movie})
       : super(key: key);
@@ -101,7 +94,7 @@ class MovieImageDetails extends StatelessWidget {
   final Movie movie;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -130,7 +123,7 @@ class MovieImageDetails extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    '4.8',
+                    movie.voteAverage.toString(),
                     style: theme.textTheme.bodyText2?.copyWith(
                       color:
                           theme.textTheme.bodyText2?.color?.withOpacity(0.62),
