@@ -1,14 +1,10 @@
-import 'dart:math';
-
-import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter16_movierec/Features/movie_flow/genre/genre.dart';
 import 'package:flutter16_movierec/Features/movie_flow/movie_repository.dart';
 import 'package:flutter16_movierec/Features/movie_flow/result/movie.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:flutter16_movierec/Core/enviornment_variables.dart';
-import 'package:flutter16_movierec/Features/movie_flow/genre/genre_entity.dart';
-import 'package:flutter16_movierec/Features/movie_flow/result/movie_entity.dart';
-import 'package:flutter16_movierec/main.dart';
+import 'dart:math';
+
 
 final movieServiceProvider = Provider<MovieService>((ref){
   final movieRepository = ref.watch(movieRepositoryProvider);
