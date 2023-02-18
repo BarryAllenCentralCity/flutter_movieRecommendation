@@ -45,7 +45,7 @@ class GenreScreen extends ConsumerWidget {
                           );
                         },
                         separatorBuilder: (context, index) {
-                          return SizedBox(
+                          return const SizedBox(
                             height: kListItemSpacing,
                           );
                         },
@@ -65,8 +65,7 @@ class GenreScreen extends ConsumerWidget {
             PrimaryButton(
                 onPressed:
                     ref.read(movieFlowControllerProvider.notifier).nextPage,
-                text: 'Continue',
-                width: 150),
+                text: 'Continue',),
             const SizedBox(
               height: kMediumSpacing,
             )

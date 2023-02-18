@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter16_movierec/Features/movie_flow/genre/genre_screen.dart';
 import 'package:flutter16_movierec/Features/movie_flow/landing/landing_screen.dart';
@@ -15,7 +14,7 @@ class MovieFLow extends ConsumerWidget {
     return PageView(
       controller: ref.watch(movieFlowControllerProvider).pageController,
       physics: const NeverScrollableScrollPhysics(),
-      children: [
+      children: const [
         LandingScreen(),
         GenreScreen(),
         RatingScreen(),

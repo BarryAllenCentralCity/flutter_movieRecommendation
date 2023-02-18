@@ -5,7 +5,7 @@ import 'package:flutter16_movierec/Features/movie_flow/movie_flow_controller.dar
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RatingScreen extends ConsumerWidget  {
-   RatingScreen(
+   const RatingScreen(
       {Key? key})
       : super(key: key);
 
@@ -54,7 +54,7 @@ class RatingScreen extends ConsumerWidget  {
                 }),
             const Spacer(),
             PrimaryButton(
-                onPressed: ref.read(movieFlowControllerProvider.notifier).nextPage, text: 'Yes Please', width: 150),
+                onPressed: ref.read(movieFlowControllerProvider.notifier).nextPage, text: 'Yes Please',),
             const SizedBox(
               height: kMediumSpacing,
             ),

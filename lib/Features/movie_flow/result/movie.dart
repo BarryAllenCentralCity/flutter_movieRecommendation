@@ -54,7 +54,7 @@ class Movie {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator == (Object other) {
     if (identical(this, other)) return true;
 
     return other is Movie &&
@@ -64,7 +64,6 @@ class Movie {
         listEquals(other.genres, genres) &&
         other.releaseDate == releaseDate;
   }
-
   @override
   int get hashcode {
     return title.hashCode ^
@@ -73,4 +72,5 @@ class Movie {
         genres.hashCode ^
         releaseDate.hashCode;
   }
+
 }

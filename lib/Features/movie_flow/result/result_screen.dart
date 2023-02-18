@@ -56,7 +56,7 @@ class ResultScreen extends ConsumerWidget {
                   PrimaryButton(
                       onPressed: () => Navigator.of(context).pop(),
                       text: 'Find Another Movie',
-                      width: 150),
+                  ),
                   const SizedBox(
                     height: kMediumSpacing,
                   )

@@ -18,7 +18,7 @@ class LandingScreen extends ConsumerWidget{
             const Spacer(),
             Image.network('https://media.istockphoto.com/id/638625882/vector/teen-in-cinema.jpg?s=612x612&w=0&k=20&c=kQOnh8GGkeL23O0UVFBnBIxZshh-VSzkf1TKjVvFLE8='),
             const Spacer(),
-            PrimaryButton(onPressed: ref.read(movieFlowControllerProvider.notifier).nextPage, text: 'Get Started', width: 120.0,),
+            PrimaryButton(onPressed: ref.read(movieFlowControllerProvider.notifier).nextPage, text: 'Get Started',),
             const SizedBox(height: kMediumSpacing,)
           ],
         ),

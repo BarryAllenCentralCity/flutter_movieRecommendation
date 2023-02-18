@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:flutter16_movierec/Features/movie_flow/movie_flow.dart';
 import 'package:flutter16_movierec/Theme/custom_theme.dart';
 
@@ -13,7 +12,7 @@ final dioProvider = Provider<Dio>((ref){
   return Dio(
     BaseOptions(
       baseUrl: 'https://api.themoviedb.org/3/',
-    )
+    ),
   );
 });
 

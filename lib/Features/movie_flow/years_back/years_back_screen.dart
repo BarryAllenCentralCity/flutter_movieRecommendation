@@ -65,7 +65,7 @@ class YearsBackScreen extends ConsumerWidget {
                 },
                 isLoading: ref.watch(movieFlowControllerProvider).movie is AsyncLoading,
                 text: 'Amazing',
-                width: 150),
+                ),
             const SizedBox(
               height: kMediumSpacing,
             ),
