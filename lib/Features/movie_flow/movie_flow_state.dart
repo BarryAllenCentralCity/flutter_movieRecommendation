@@ -1,41 +1,23 @@
+import 'package:dio/dio.dart';
+import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter16_movierec/Features/movie_flow/genre/genre.dart';
 import 'package:flutter16_movierec/Features/movie_flow/result/movie.dart';
 
-
-const movieMock = Movie(
-  title: 'The Hulk',
-  overview:
-  'Bruce Banner, researcher, suffers an accident in the lab the turns him into this monster',
-  voteAverage: 4.8,
-  genres: [Genre(name: 'Action'), Genre(name: 'Fantasy')],
-  releaseDate: '2019-05-24',
-  backdropPath: '',
-  posterPath: '',
-);
-
-const genresMock = [
-  Genre(name: 'Action'),
-  Genre(name: 'Comedy'),
-  Genre(name: 'Horror'),
-  Genre(name: 'Anime'),
-  Genre(name: 'Drama'),
-  Genre(name: 'Romance'),
-  Genre(name: 'Family'),
-];
 
 @immutable
 class MovieFlowState {
   final PageController pageController;
   final int rating;
   final int yearsBack;
-  final List<Genre> genres;
-  final Movie movie;
+  final AsyncValue<List<Genre>> genres;
+  final AsyncValue<Movie> movie;
 
   const MovieFlowState({
     required this.pageController,
-    this.movie = movieMock,
-    this.genres = genresMock,
+    required this.movie,
+    required this.genres,
     this.rating = 5,
     this.yearsBack = 10,
 });
@@ -44,8 +26,8 @@ class MovieFlowState {
   PageController? pageController,
     int? rating,
     int? yearsBack,
-    List<Genre>? genres,
-    Movie? movie,
+    AsyncValue<List<Genre>>? genres,
+    AsyncValue<Movie>? movie,
 }){
     return MovieFlowState(pageController: pageController ?? this.pageController,
     rating: rating ?? this.rating,
@@ -69,7 +51,7 @@ class MovieFlowState {
 
   @override
   int get hashcode {
-    return pageController.hashCode ^ rating.hashCode ^ yearsBack.hashCode ^ genres.hashCode ^ movie.hashcode;
+    return pageController.hashCode ^ rating.hashCode ^ yearsBack.hashCode ^ genres.hashCode;
   }
 
 }

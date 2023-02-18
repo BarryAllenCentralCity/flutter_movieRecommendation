@@ -6,9 +6,9 @@ import 'package:flutter16_movierec/Features/movie_flow/result/result_screen.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class YearsBackScreen extends ConsumerWidget {
-  const YearsBackScreen(
-      {Key? key, })
-      : super(key: key);
+  const YearsBackScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -16,7 +16,8 @@ class YearsBackScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: ref.read(movieFlowControllerProvider.notifier).previousPage,
+          onPressed:
+              ref.read(movieFlowControllerProvider.notifier).previousPage,
         ),
       ),
       body: Center(
@@ -45,16 +46,26 @@ class YearsBackScreen extends ConsumerWidget {
             ),
             const Spacer(),
             Slider(
-                value: ref.watch(movieFlowControllerProvider).yearsBack.toDouble(),
+                value:
+                    ref.watch(movieFlowControllerProvider).yearsBack.toDouble(),
                 min: 0,
                 max: 70,
                 divisions: 70,
                 label: '${ref.watch(movieFlowControllerProvider).yearsBack}',
                 onChanged: (svalue) {
-                  ref.read(movieFlowControllerProvider.notifier).updateYearsBack(svalue.toInt());
+                  ref
+                      .read(movieFlowControllerProvider.notifier)
+                      .updateYearsBack(svalue.toInt());
                 }),
             const Spacer(),
-            PrimaryButton(onPressed: () => Navigator.of(context).push(ResultScreen.route()), text: 'Amazing', width: 150),
+            PrimaryButton(
+                onPressed: () async {
+                  await ref.read(movieFlowControllerProvider.notifier).getRecommendedMovies();
+                  Navigator.of(context).push(ResultScreen.route());
+                },
+                isLoading: ref.watch(movieFlowControllerProvider).movie is AsyncLoading,
+                text: 'Amazing',
+                width: 150),
             const SizedBox(
               height: kMediumSpacing,
             ),
