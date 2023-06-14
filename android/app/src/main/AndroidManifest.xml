@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flutter16_movierec">
    <application
-        android:label="flutter16_movierec"
+        android:label="MovieRecommendation"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

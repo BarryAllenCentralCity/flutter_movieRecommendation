@@ -5,7 +5,7 @@ class MovieEntity {
   final String title;
   final String overview;
   final num voteAverage;
-  final List<int> genreIds;
+  final List<dynamic> genreIds;
   final String releaseDate;
   final String? backdropPath;
   final String? posterPath;

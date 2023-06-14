@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter16_movierec/Features/movie_flow/genre/genre.dart';
+import 'package:flutter16_movierec/Features/movie_flow/genre/genre_entity.dart';
 import 'movie_entity.dart';
 
 @immutable
@@ -64,13 +65,12 @@ class Movie {
         listEquals(other.genres, genres) &&
         other.releaseDate == releaseDate;
   }
+
   @override
-  int get hashcode {
-    return title.hashCode ^
-        overview.hashCode ^
-        voteAverage.hashCode ^
-        genres.hashCode ^
-        releaseDate.hashCode;
-  }
+  int get hashCode => title.hashCode ^
+  overview.hashCode ^
+  voteAverage.hashCode ^
+  genres.hashCode ^
+  releaseDate.hashCode;
 
 }

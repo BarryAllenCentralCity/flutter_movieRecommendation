@@ -3,6 +3,7 @@ import 'package:flutter16_movierec/Features/movie_flow/genre/genre_screen.dart';
 import 'package:flutter16_movierec/Features/movie_flow/landing/landing_screen.dart';
 import 'package:flutter16_movierec/Features/movie_flow/movie_flow_controller.dart';
 import 'package:flutter16_movierec/Features/movie_flow/rating/rating_screen.dart';
+import 'package:flutter16_movierec/Features/movie_flow/result/result_screen.dart';
 import 'package:flutter16_movierec/Features/movie_flow/years_back/years_back_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

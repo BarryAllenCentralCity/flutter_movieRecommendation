@@ -36,22 +36,31 @@ class TMDBMovieRepository implements MovieRepository{
   @override
   Future<List<MovieEntity>> getRecommendedMovies(double rating, String date, String genreIds) async {
     final response = await dio.get('discover/movie',
-    queryParameters: {
-      'api_key': api,
-      'language': 'en-US',
-      'sort_by': 'popularity.desc',
-      'include_adult': false,
-      'vote_average.gte': rating,
-      'page': 1,
-      'release_date.gte': date,
-      'with_genres': genreIds,
-    }
+        queryParameters: {
+          'api_key': api,
+          'language': 'en-US',
+          'sort_by': 'popularity.desc',
+          'include_adult': false,
+          'vote_average.gte': rating,
+          'page': 1,
+          'release_date.gte': date,
+          'with_genres': genreIds,
+        }
     );
 
     final results = List<Map<String, dynamic>>.from(response.data['results']);
+    /*try {
+      final movies = results.map((e) => MovieEntity.fromMap(e)).toList();
+      return movies;
+    }
+    catch (e) {
+      //print(e);
+      final movies = results.map((e) => MovieEntity.fromMap(e)).toList();
+      return movies;
+    }*/
+
     final movies = results.map((e) => MovieEntity.fromMap(e)).toList();
     return movies;
 
   }
-
 }
